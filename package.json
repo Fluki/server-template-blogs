@@ -1,0 +1,25 @@
+{
+  "name": "server-template-blogs",
+  "version": "1.0.0",
+  "description": "Server for establishing connection with database and front-end",
+  "main": "index.js",
+  "scripts": {
+    "test": "run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fluki/server-template-blogs.git"
+  },
+  "keywords": [
+    "server"
+  ],
+  "author": "Aleksandar Vasilic, Miloje Djukanovic",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Fluki/server-template-blogs/issues"
+  },
+  "homepage": "https://github.com/Fluki/server-template-blogs#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
