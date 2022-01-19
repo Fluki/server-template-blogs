@@ -4,6 +4,7 @@
   "description": "Server for establishing connection with database and front-end",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "run test"
   },
   "repository": {
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/Fluki/server-template-blogs#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15"
   }
 }
