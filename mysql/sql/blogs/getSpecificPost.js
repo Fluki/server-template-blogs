@@ -2,19 +2,31 @@ const express = require('express');
 const pool = require('../../pool');
 const router = express.Router();
 
-const getSpecificPost = router.get(`/blogs/:id`, (req, res) => {
+const getSpecificPost = router.get(`/post/:id`, (req, res) => {
   const id = req.params.id;
+  const query = `SELECT * from blogs WHERE id=${id}`;
 
   pool.getConnection((err, connection) => {
-    if (err) throw err;
-    console.log('connected as id ' + connection.threadId);
-    connection.query(`SELECT * from blogs WHERE id=${id}`, (err, rows) => {
+    connection.query(query, (err, rows) => {
       connection.release();
 
-      if (!err) {
-        res.send(rows);
+      if (err || rows.length === 0) {
+        const data = {
+          ok: false,
+          message: "Couldn't find post.",
+        };
+
+        res.send(data);
+        res.end();
       } else {
-        console.log(err);
+        const data = {
+          ok: true,
+          message: 'Post found.',
+          post: rows[0],
+        };
+
+        res.send(data);
+        res.end();
       }
     });
   });

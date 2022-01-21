@@ -6,17 +6,39 @@ const deletePost = router.get(`/delete/:id`, (req, res) => {
   const id = req.params.id;
   const deleteQuery = `DELETE FROM blogs WHERE id=${id}`;
 
-  res.send('Success');
-
   pool.getConnection((err, connection) => {
-    if (err) throw err;
-    console.log('connected as id ' + connection.threadId);
-    connection.query(deleteQuery, (err, rows) => {
-      connection.release();
-    });
-  });
+    if (err) {
+      const data = {
+        ok: false,
+        message: 'Connection to database failed.',
+      };
 
-  console.log(id);
+      res.send(data);
+      res.end();
+    } else {
+      connection.query(deleteQuery, (err, rows) => {
+        connection.release();
+
+        if (err) {
+          const data = {
+            ok: false,
+            message: "Couldn't delete post.",
+          };
+
+          res.send(data);
+          res.end();
+        } else {
+          const data = {
+            ok: true,
+            message: 'Post deleted.',
+          };
+
+          res.send(data);
+          res.end();
+        }
+      });
+    }
+  });
 });
 
 module.exports = deletePost;
